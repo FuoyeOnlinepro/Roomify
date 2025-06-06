@@ -254,7 +254,39 @@
   </div>
 </div>
 
+<style>
+  .spinner {
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #3498db;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 0.8s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+  }
 
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
+
+
+
+<script>
+  const button = document.getElementById('submitApplication');
+  button.addEventListener('click', () => {
+    button.disabled = true; // disable to prevent multiple clicks
+    button.innerHTML = '<span class="spinner"></span> Processing...';
+    
+    // Simulate an async operation (like a fetch or AJAX call)
+    setTimeout(() => {
+      button.disabled = false;
+      button.innerHTML = 'Submit'; // restore button text
+    }, 3000);
+  });
+</script>
 
 <style>
   .modal {
@@ -418,7 +450,7 @@
       .catch(error => {
         console.error(error);
         applyButton.textContent = 'Apply';
-        showErrorModal('An unexpected error occurred.');
+        showErrorModal('Error!! You are not logged in .');
       })
       .finally(() => {
         applyButton.disabled = false;
